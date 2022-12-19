@@ -1,6 +1,7 @@
 package aspects;
-
-import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
 
 import java.io.IOException;
 import java.util.logging.FileHandler;
@@ -19,13 +20,13 @@ public class LoggingAspect {
     @Pointcut("execution(* metier.MetierBanqueImpl.*(..)")
     public void pc1(){}
 //    @Before("pc1()")
-//    public void avant(JointPoint jointPoint){
+//    public void avant(JoinPoint jointPoint){
 //        t1=System.currentTimeMillis();
 //        logger.info("-----------------------------------------");
 //        logger.info("Avant l'execution de la methode" + jointPoint.getSignature());
 //    }
 //    @After("pc1()")
-//    public void apres(JointPoint jointPoint){
+//    public void apres(JoinPoint jointPoint){
 //        logger.info("Apres l'execution de la methode" + jointPoint.getSignature());
 //    t2=System.currentTimeMillis();
 //        logger.info("Duree d'execution de la methode" + (t2-t1));
@@ -33,7 +34,7 @@ public class LoggingAspect {
 //    }
 
     @Around("pc1")
-    public  Object autour(ProceedingJoinPoint proceedingJoinPoint, JointPoint jointPoint) throws Throwable{
+    public  Object autour(ProceedingJoinPoint proceedingJoinPoint, JoinPoint jointPoint) throws Throwable{
         long t1=System.currentTimeMillis();
         logger.info("-------------------------------------------");
         logger.info("Avant l'execution de la methode" + jointPoint.getSignature());
